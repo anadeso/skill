@@ -144,6 +144,32 @@ Este documento resume os principais princípios do livro "Código Limpo" utiliza
 - Refatore constantemente
 - Mantenha o código simples
 
+### Capítulo 10: Classes (Classes)
+
+**Princípios:**
+- Mantenha classes pequenas - Single Responsibility Principle (SRP)
+- Nome da classe deve descrever seu propósito
+- Meça tamanho de classe por número de responsabilidades
+- Classes devem ter alta coesão (métodos e campos relacionados)
+- Organize métodos apropriadamente (público antes de privado)
+- Classes devem ser organizadas para mudança
+- Evite "god classes" com muitas responsabilidades
+- Variáveis de instância devem ser privadas
+- Métodos devem trabalhar com dados da classe
+- Dependências devem estar claras no topo
+
+**Antipadrões:**
+- Classes muito grandes (múltiplas responsabilidades)
+- Baixa coesão - métodos não-relacionados
+- Organização ruim de membros
+- Variáveis de instância públicas
+- Muitas variáveis de instância
+- Métodos que não usam dados da classe
+- Propósito da classe pouco claro
+- Difícil de estender ou modificar
+- Métodos espalhados sem agrupamento lógico
+- Comentários necessários para explicar organização
+
 ### Capítulo 8: Boundaries (Limites)
 
 **Princípios:**
@@ -206,50 +232,123 @@ Este documento resume os principais princípios do livro "Código Limpo" utiliza
 - Thread pools sem gerenciamento apropriado
 - Testes inadequados de código concorrente
 
-### Capítulo 17: Heuristics (Heurísticas)
+### Capítulo 11: Systems (Sistemas)
 
-**Regras de Nomenclatura:**
-- Use nomes do domínio do problema
-- Evite desinformação em nomes
-- Use distinções significativas
-- Use nomes pronunciáveis
-- Evite codificação em nomes (notação húngara)
-- Evite mapeamento mental
-- Uma palavra por conceito
-- Adicione contexto significativo
-- Não adicione contexto gratuito
+**Princípios:**
+- Separe construção de uso de objetos
+- Injeção de dependência para gerenciar dependências
+- Factories e dependency containers
+- Cross-cutting concerns via AOP ou middleware
+- Evolução de sistema - design para mudança
+- Escale de simples para complexo gradualmente
+- Evite otimização prematura
+- Use convenções de nomenclatura para revelar intenção
+- Mantenha arquitetura do sistema visível no código
+- Desacople subsistemas
 
-**Regras de Função:**
-- Evite side effects
-- Não passe flags para funções
-- Use exceções ao invés de códigos de retorno
-- Extraia try/catch em funções separadas
-- Tratamento de erro é uma coisa
+**Antipadrões:**
+- Misturar construção com lógica de negócio
+- Dependências hard-wired espalhadas
+- Sem injeção de dependência ou IoC
+- Factories não usadas para criação complexa
+- Cross-cutting concerns espalhados
+- Sem clara separação de conceitos
+- Módulos acoplados
+- Arquitetura difícil de entender
+- Configuração misturada com lógica
+- Difícil de substituir componentes
 
-**Regras de Comentários:**
-- Evite comentários redundantes
-- Não comente código ruim - reescreva-o
-- Não comente código óbvio
-- Não use comentários em chaves de fechamento
-- Não comente código não-utilizado - delete-o
-- Use comentários para explicar regras de negócio
-- Use comentários para avisos
+### Capítulo 12: Emergence (Emergência)
 
-**Regras de Formatação:**
-- Mantenha linhas curtas
-- Use espaçamento significativamente
-- Não quebre indentação
-- Espaço ao redor de operadores
-- Sem espaços em branco no final
-- Alinhe itens similares
+**As 4 Regras de Kent Beck para Design Simples (em prioridade):**
+1. **Todos os testes passam** - Código deve ser funcional e correto
+2. **Sem duplicação** - DRY principle, eliminar repetição
+3. **Expressa intenção** - Código é claro, auto-documentado
+4. **Mínimo de classes/métodos** - Fewest elements possible
 
-**Regras de Objetos & Estruturas:**
-- Esconda estrutura interna
-- Prefira objetos sobre dados primitivos
-- Evite feature envy
-- Evite data clumps
-- Mantenha dados relacionados juntos
-- Separe dados não-relacionados
+Estas regras aplicadas iterativamente levam a design emergente sem over-engineering.
+
+**Antipadrões:**
+- Testes falhando ou faltando
+- Código duplicado e lógica repetida
+- Código que obscurece intenção
+- Soluções over-engineered com classes desnecessárias
+- Abstração prematura
+- Classes/métodos sem propósito claro
+- Complexidade que não agrega valor
+
+### Capítulo 17: Heuristics (Heurísticas - 55+ Regras Numeradas)
+
+**Regras G (Gerais - G1 a G36):**
+- **G1**: Múltiplas linguagens em um arquivo - use uma por arquivo
+- **G2**: Comportamento óbvio não implementado - faça o que é esperado
+- **G3**: Comportamento de limite incorreto - trate casos extremos
+- **G4**: Segurança/guarda sobrescrita - não desabilite features de segurança
+- **G5**: Duplicação - aplique DRY rigorosamente
+- **G6**: Código no nível de abstração errado - mantenha consistência
+- **G7**: Muitos parâmetros - idealmente 0-1, máximo 2-3, nunca 4+
+- **G8**: Código morto - delete imediatamente
+- **G9**: Separação vertical - coloque conceitos relacionados juntos
+- **G10**: Inconsistência - seja consistente em operações similares
+- **G11**: Bagunça - remova variáveis/funções sem propósito
+- **G12**: Acoplamento artificial - não acople coisas não-relacionadas
+- **G13**: Feature envy - não acesse internals de outro objeto
+- **G14**: Argumentos seletores (flags) - divida a função
+- **G15**: Intenção obscurecida - torne a intenção clara
+- **G16**: Responsabilidade deslocada - coloque código onde é esperado
+- **G17**: Static inapropriado - prefira não-static quando possível
+- **G18**: Use variáveis explicativas - extraia para variáveis nomeadas
+- **G19**: Nomes de função devem explicar o que fazem - nomes descritivos
+- **G20**: Entenda o algoritmo - saiba o que o código faz
+- **G21**: Torne dependências lógicas físicas - mostre dependências
+- **G22**: Prefira polimorfismo a if/else para type checking - não é regra absoluta para todo if/else
+- **G23**: Prefira exceções a códigos de retorno - use exceções
+- **G24**: Extraia try/catch blocks - mantenha tratamento separado
+- **G25**: Não retorne null - lance exceção ou use Optional
+- **G26**: Não passe null - evite parâmetros null
+- **G27**: Evite encoding - sem notação húngara
+- **G28**: Nomes devem expressar intenção - nomes significativos
+- **G29**: Evite condicionais negativas - use forma positiva (ex: if valid ao invés de if not invalid)
+- **G30**: Funções sem side effects - seja previsível
+- **G31**: Acoplamento temporal oculto - revele dependências
+- **G32**: Não seja arbitrário - escolha convenções por boas razões
+- **G33**: Encapsule condições-limite - centralize tratamento
+- **G34**: Funções devem descer um nível de abstração - mantenha coesão
+- **G35**: Mantenha dados configuráveis em níveis altos - configuração acima implementação
+- **G36**: Evite navegação transitiva - não encadeie chamadas (Lei de Demeter)
+
+**Regras N (Nomes - N1 a N7):**
+- **N1**: Escolha nomes descritivos - clareza é essencial
+- **N2**: Nomes em nível apropriado de abstração - linguagem do domínio
+- **N3**: Use nomenclatura padrão - siga convenções da indústria
+- **N4**: Nomes não-ambíguos - sem possibilidade de confusão
+- **N5**: Use nomes longos para escopos longos - curtos para curtos
+- **N6**: Evite encoding - nomes, não códigos
+- **N7**: Nomes devem descrever efeitos colaterais - revele o que faz
+
+**Regras F (Funções - F1 a F4):**
+- **F1**: Muitos argumentos - reduza contagem de parâmetros
+- **F2**: Argumentos de saída - use valores de retorno
+- **F3**: Argumentos flag - divida a função, não use flags booleanas
+- **F4**: Funções mortas - delete funções não-usadas
+
+**Regras C (Comentários - C1 a C5):**
+- **C1**: Informação inapropriada - comentários para intenção, não fatos
+- **C2**: Comentário obsoleto - mantenha comentários atualizados
+- **C3**: Comentários redundantes - não explique código óbvio
+- **C4**: Comentários mal escritos - escreva claramente ou não escreva
+- **C5**: Código comentado - delete, use version control
+
+**Regras T (Testes - T1 a T9):**
+- **T1**: Testes insuficientes - cubra todos os caminhos
+- **T2**: Use ferramenta de cobertura - conheça percentual de cobertura
+- **T3**: Não pule testes triviais - teste tudo
+- **T4**: Teste ignorado - corrija ou delete, não ignore
+- **T5**: Teste condições-limite - casos extremos importam
+- **T6**: Teste exaustivamente perto de bugs - áreas bug-prone
+- **T7**: Padrões de falha são reveladores - analise padrões
+- **T8**: Padrões de cobertura de teste - cobertura uniforme
+- **T9**: Testes devem ser rápidos - testes lentos não são executados
 
 ### Capítulos 14-16: Estudos de Caso Práticos
 

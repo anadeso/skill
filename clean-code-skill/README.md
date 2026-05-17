@@ -55,21 +55,41 @@ The skill provides structured analysis with:
 
 ## Development Status
 
-This skill is designed to be evaluated against **15 comprehensive test cases** covering:
+This skill is designed to be evaluated against **21 comprehensive test cases** covering:
 - **Multiple programming languages** (Python, JavaScript, Java, Go, C#, Ruby, TypeScript)
-- **10+ categories of code quality issues**
+- **12+ categories of code quality issues**
 - **Real-world code patterns** from various domains
-- **Advanced topics**: Testing, Boundaries, Concurrency, Heuristics
-- **Parameter heuristics**: Correct parameter count recommendations (0-1 ideal, max 2-3)
-- **Case studies**: Patterns inspired by real refactoring from Args, JUnit, and SerialDate examples
+- **All 17 chapters** from "Clean Code" including newly added Chapter 10 (Classes)
+- **Advanced topics**: Testing, Boundaries, Concurrency, Systems, Emergence, Heuristics
+- **55+ numbered heuristics** with accurate categorization (G1-G36, N1-N7, F1-F4, C1-C5, T1-T9)
+- **Parameter heuristics**: Correct parameter count (0-1 ideal, max 2-3)
+- **Case studies**: Patterns from Args, JUnit, and SerialDate
 
 ## Key Corrections & Improvements
 
-✅ **Fixed**: Parameter count recommendation corrected from "max 4" to "ideally 0-1, max 2-3"
-✅ **Added**: Chapter 8 (Boundaries) - external dependencies and wrapper patterns
-✅ **Added**: Chapter 9 (Testing) - F.I.R.S.T principle and TDD
-✅ **Added**: Chapter 13 (Concurrency) - threading and synchronization issues
-✅ **Added**: Chapter 17 (Heuristics) - advanced naming, function, and formatting rules
-✅ **Added**: Chapters 14-16 (Case Studies) - practical refactoring examples
-✅ **Expanded**: Test cases from 10 to 15, including new domains
-✅ **Verified**: All recommendations align with original "Clean Code" book by Robert C. Martin
+### Phase 1: Initial Corrections
+✅ **Fixed**: Parameter count (was "max 4" → now "0-1 ideal, max 2-3")
+✅ **Added**: Chapter 8 (Boundaries) - external dependencies, wrappers
+✅ **Added**: Chapter 9 (Testing) - F.I.R.S.T, TDD
+✅ **Added**: Chapter 13 (Concurrency) - threading, synchronization
+
+### Phase 2: Expanded Coverage
+✅ **Added**: Chapter 11 (Systems) - DI, factories, system evolution
+✅ **Added**: Chapter 12 (Emergence) - Kent Beck's 4 rules of simple design
+✅ **Expanded**: Chapter 17 (Heuristics) from generic to **55+ specific numbered rules**
+  - **G Rules (G1-G36)**: General heuristics
+  - **N Rules (N1-N7)**: Naming heuristics
+  - **F Rules (F1-F4)**: Function heuristics
+  - **C Rules (C1-C5)**: Comment heuristics
+  - **T Rules (T1-T9)**: Test heuristics
+✅ **Added**: Chapters 14-16 (Case Studies) - practical refactoring
+✅ **Expanded**: Test cases from 15 to **20**
+
+### Phase 3: Precision & Organization Refinements
+✅ **Fixed**: Heuristics organization - corrected G29-G31 to proper G Rules (not test rules)
+✅ **Refined**: G22 - Now correctly nuanced: polimorphism preferred for type checking (not all if/else)
+✅ **Added**: Chapter 10 (Classes) - SRP, cohesion, class organization
+✅ **Added**: Test case 20 - Focuses on Chapter 10 (Classes), SRP violations, low cohesion
+✅ **Expanded**: Total test cases to **21** with complete chapter coverage
+✅ **Verified**: All heuristics accurately categorized per original book structure
+✅ **Aligned**: All recommendations match Robert C. Martin's exact guidance

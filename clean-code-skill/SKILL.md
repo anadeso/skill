@@ -1,6 +1,6 @@
 ---
 name: clean-code-analyzer
-description: Use this skill whenever you need to review code for quality and maintainability issues. Trigger when users ask to improve code readability, identify coding problems, refactor code, or analyze code for best practices. Analyzes code against principles from "Clean Code" by Robert C. Martin - identifying violations of naming conventions, function complexity, code comments, error handling, and overall code structure quality.
+description: Use this skill whenever you need to review code for quality and maintainability issues. Trigger when users ask to improve code readability, identify coding problems, refactor code, or analyze code for best practices. Analyzes code against ALL 17+ chapters from "Clean Code" by Robert C. Martin including: naming conventions, function design, comments, formatting, error handling, code structure, classes, boundaries/dependencies, testing, concurrency, system architecture, simple design rules, and 55+ specific heuristics (G1-G36, N1-N7, F1-F4, C1-C5, T1-T9).
 ---
 
 # Clean Code Analyzer
@@ -157,6 +157,72 @@ Analyze code for quality issues based on Clean Code principles. This skill helps
 - Test setup that's overly complex
 - Tests that don't verify actual behavior
 
+### 10. **Classes** (Chapter 10)
+- Keep classes small - single responsibility principle (SRP)
+- Class name should describe its purpose
+- Measure class size by number of responsibilities, not lines of code
+- Classes should have high cohesion (related methods and fields)
+- Maintain proper method organization (public before private)
+- Classes should be organized for change
+- Avoid "god classes" with too many responsibilities
+- Instance variables should be private
+- Methods should work with the class's data
+- Dependent classes should be clearly listed at top
+
+**Issues to look for:**
+- Classes too large (multiple responsibilities)
+- Low cohesion - unrelated methods
+- Poor organization of members
+- Public instance variables
+- Too many instance variables
+- Methods that don't use class data
+- Difficult to understand class purpose
+- Hard to extend or modify class
+- Methods scattered without logical grouping
+- Comments needed to explain class organization
+
+### 11. **Systems** (Chapter 11)
+- Separate construction from use of objects
+- Dependency injection for managing dependencies
+- Factories and dependency containers
+- Cross-cutting concerns through AOP or middleware
+- System evolution - design for change
+- Scale from simple to complex gradually
+- Avoid premature optimization
+- Use naming conventions to reveal intent
+- Keep system architecture visible in code
+- Decouple subsystems
+
+**Issues to look for:**
+- Mixing construction with business logic
+- Hard-wired dependencies throughout code
+- No dependency injection or inversion of control
+- Factories not used for complex object creation
+- Cross-cutting concerns scattered everywhere
+- No clear separation of concerns
+- Tightly coupled modules
+- Hard to understand overall system architecture
+- Configuration mixed with logic
+- Difficult to replace components
+
+### 12. **Emergence** (Chapter 12)
+**Kent Beck's 4 Rules of Simple Design (in priority order):**
+1. **All tests pass** - Code must be functional and correct
+2. **No duplication** - DRY principle, eliminate code repetition
+3. **Expresses intent** - Code is clear, self-documenting
+4. **Minimal classes/methods** - Fewest elements possible
+
+These rules applied iteratively lead to emergent design without over-engineering.
+
+**Issues to look for:**
+- Failing or missing tests
+- Duplicated code and logic
+- Code that obscures intent
+- Over-engineered solutions with unnecessary classes
+- Premature abstraction
+- Classes/methods that don't serve a clear purpose
+- Complexity that doesn't add value
+
 ### 13. **Concurrency** (Chapter 13)
 - Concurrency is hard - minimize it where possible
 - Keep concurrency code separate from business logic
@@ -175,57 +241,78 @@ Analyze code for quality issues based on Clean Code principles. This skill helps
 - Thread pools without proper management
 - Inadequate testing of concurrent code
 
-### 17. **Heuristics** (Chapter 17 - Important Rules)
+### 17. **Heuristics** (Chapter 17 - 55+ Numbered Rules)
 
-**General Rules:**
-- Use names from the problem domain
-- Avoid disinformation in names
-- Make distinction meaningful
-- Use pronounceable names
-- Avoid encoding in names
-- Avoid mental mapping
-- Pick one word per concept
-- Add meaningful context
-- Don't add gratuitous context
+**G Rules (General - G1 to G36):**
+- **G1**: Multiple languages in one file - use single language per file
+- **G2**: Obvious behaviour is unimplemented - do what's expected
+- **G3**: Incorrect boundary behavior - handle edge cases correctly
+- **G4**: Overridden safeties and guards - don't disable safety features
+- **G5**: Duplication - apply DRY principle rigorously
+- **G6**: Code at wrong level of abstraction - keep consistent levels
+- **G7**: Too many parameters - ideally 0-1, max 2-3, never 4+
+- **G8**: Dead code - delete unused code immediately
+- **G9**: Vertical separation - put related concepts close together
+- **G10**: Inconsistency - be consistent in similar operations
+- **G11**: Clutter - remove variables/functions that serve no purpose
+- **G12**: Artificial coupling - unrelated things shouldn't depend
+- **G13**: Feature envy - functions shouldn't access other class internals
+- **G14**: Selector arguments (flags) - split function instead of using flags
+- **G15**: Obscured intent - make intent clear in code
+- **G16**: Misplaced responsibility - put code where it's expected
+- **G17**: Inappropriate static - prefer non-static when possible
+- **G18**: Use explanatory variables - extract to named variables
+- **G19**: Function names should say what they do - descriptive names
+- **G20**: Understand the algorithm - know what code does
+- **G21**: Make logical dependencies physical - show dependencies
+- **G22**: Prefer polymorphism to if/else for type checking - use inheritance for type switching (not absolute rule for all if/else)
+- **G23**: Prefer exceptions to returning error codes - use exceptions
+- **G24**: Extract try/catch blocks - keep error handling separate
+- **G25**: Don't return null - throw exception or use Optional
+- **G26**: Don't pass null - avoid null parameters
+- **G27**: Avoid encoding - no Hungarian notation
+- **G28**: Names should convey intent - choose meaningful names
+- **G29**: Avoid negative conditionals - use positive form when possible (e.g., if valid instead of if not invalid)
+- **G30**: Functions should have no side effects - be predictable
+- **G31**: Hidden temporal couplings - reveal dependencies (not related to tests, but general rule)
+- **G32**: Don't be arbitrary - choose conventions for good reasons
+- **G33**: Encapsulate boundary conditions - centralize handling
+- **G34**: Functions should descend only one level of abstraction - keep abstraction level consistent
+- **G35**: Keep configurable data at high levels - configuration above implementation
+- **G36**: Avoid transitive navigation - don't chain method calls (Law of Demeter)
 
-**Function Rules:**
-- Avoid side effects
-- Don't pass flags to functions
-- Use exceptions rather than return codes
-- Extract try/catch blocks into separate functions
-- Error handling should be one thing
+**N Rules (Names - N1 to N7):**
+- **N1**: Choose descriptive names - clarity is essential
+- **N2**: Names at appropriate level of abstraction - use domain language
+- **N3**: Use standard nomenclature - follow industry conventions
+- **N4**: Unambiguous names - no confusion possible
+- **N5**: Use long names for long scopes - short names for short scopes
+- **N6**: Avoid encoding - names, not codes
+- **N7**: Names should describe side effects - reveal what function does
 
-**Comment Rules:**
-- Avoid redundant comments
-- Don't comment bad code - rewrite it
-- Don't comment obvious code
-- Don't use closing brace comments
-- Don't comment unused code - delete it
-- Use comments to explain business rules, intent
-- Use comments for warnings
+**F Rules (Functions - F1 to F4):**
+- **F1**: Too many arguments - reduce parameter count
+- **F2**: Output arguments - use return values, not output params
+- **F3**: Flag arguments - split function, don't use boolean flags
+- **F4**: Dead functions - delete unused functions
 
-**Formatting Rules:**
-- Keep lines short
-- Use whitespace meaningfully
-- Don't break indentation
-- Space around operators
-- No trailing spaces
-- Align similar items
+**C Rules (Comments - C1 to C5):**
+- **C1**: Inappropriate information - comments for intent, not facts
+- **C2**: Obsolete comment - keep comments updated
+- **C3**: Redundant comments - don't explain obvious code
+- **C4**: Poorly written comments - write clearly or don't write
+- **C5**: Commented-out code - delete it, use version control
 
-**Name Rules:**
-- Classes: nouns (User, Customer)
-- Methods: verbs (postPayment, deletePage)
-- Boolean methods: is/has prefix (isValid, hasItems)
-- Search-friendly names
-- Consistency across codebase
-
-**Object & Data Structure Rules:**
-- Hide internal structure
-- Prefer objects over primitive data
-- Avoid feature envy
-- Avoid data clumps
-- Keep related data together
-- Keep unrelated data separate
+**T Rules (Tests - T1 to T9):**
+- **T1**: Insufficient tests - cover all code paths
+- **T2**: Use coverage tool - know coverage percentage
+- **T3**: Don't skip trivial tests - test everything
+- **T4**: Ignored test - fix or delete, don't ignore
+- **T5**: Test boundary conditions - edge cases matter
+- **T6**: Exhaustively test near bugs - bug-prone areas need tests
+- **T7**: Patterns of failure are revealing - analyze test patterns
+- **T8**: Test coverage patterns - coverage should be uniform
+- **T9**: Tests should be fast - slow tests aren't run
 
 ### Practical Case Studies (Chapters 14-16)
 - **Chapter 14 - Args**: Parsing command-line arguments - demonstrates refactoring for clarity
@@ -278,6 +365,12 @@ Always format your analysis using this structure:
 
 #### Class & Object Issues
 - **Issue**: [class design problem]
+- **Location**: [file/line if possible]
+- **Severity**: High/Medium/Low
+- **Suggestion**: [how to fix it]
+
+#### Class Organization Issues (Chapter 10)
+- **Issue**: [class size, cohesion, or organization problem]
 - **Location**: [file/line if possible]
 - **Severity**: High/Medium/Low
 - **Suggestion**: [how to fix it]
